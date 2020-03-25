@@ -54,6 +54,7 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 
 const axios = Axios
+axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 Vue.prototype.$axios = axios
 
 Vue.use(VueAxios, Axios)
@@ -90,6 +91,9 @@ export default {
   mounted(){
     this.updateUserInfo()
   },
+  created(){
+    this.$axios.defaults.headers.common['Authorization'] = "Token " + this.token;
+  },
   methods: {
     isHalfWidth(str) {
       str = (str==null)? "":str
@@ -100,7 +104,6 @@ export default {
       }
     },
     loginUser(){
-      console.log(this.$refs.form)
       if(this.$refs.form.validate()){
         this.updateUserInfo()
 

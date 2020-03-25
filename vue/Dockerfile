@@ -11,6 +11,7 @@ FROM nginx:1.17.9
 
 RUN apt-get update -qq && \
     apt-get install -y vim \
+    curl \
     dnsutils
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html

@@ -62,11 +62,16 @@ import Vue from 'vue'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import ActionCable from 'actioncable'
+import Apiserver from '../apiserver.js'
 
 const axios = Axios
+axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 Vue.prototype.$axios = axios
 
-const cable = ActionCable.createConsumer('ws:192.168.56.102:3000/cable')
+const api = Apiserver
+Vue.prototype.$api = api
+
+const cable = ActionCable.createConsumer('ws:' + api.host + ':' + api.port + '/cable')
 Vue.prototype.$cable = cable
 
 Vue.use(VueAxios, Axios)
@@ -211,7 +216,7 @@ export default {
       }
     },
     getMessages(){
-      this.$axios.get('http://192.168.56.102:3000/api/v1/getMessages/' + this.$route.params['id'])
+      this.$axios.get(this.$api.getURL('getMessages/') + this.$route.params['id'])
       .then(response => {
         this.loadMessages(response.data)
       })
@@ -231,7 +236,7 @@ export default {
       this.$refs.chat.sendMessage(content);
     },
     getStrokes(){
-      this.$axios.get('http://192.168.56.102:3000/api/v1/getStroke/' + this.$route.params['id'])
+      this.$axios.get(this.$api.getURL('getStroke/') + this.$route.params['id'])
       .then(response => {
         this.loadStrokes(response.data)
       })

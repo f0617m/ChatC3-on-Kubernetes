@@ -77,9 +77,14 @@
 import Vue from 'vue'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
+import Apiserver from '../apiserver.js'
 
 const axios = Axios
+axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 Vue.prototype.$axios = axios
+
+const api = Apiserver
+Vue.prototype.$api = api
 
 Vue.use(VueAxios, Axios)
 
@@ -103,6 +108,7 @@ export default {
   created () {
     this.$vuetify.theme.light = true
     this.contents = this.originalcontents
+    this.$axios.defaults.headers.common['Authorization'] = "Token " + this.token;
   },
   beforeRouteUpdate (to, from, next) {
     //再描画前のアクション

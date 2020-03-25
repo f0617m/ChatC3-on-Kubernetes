@@ -160,7 +160,7 @@ export default {
       this.ctx.stroke()
     },
     sendLine(room_id, user_id, fromx, fromy, tox, toy, color, width){
-      this.$axios.post('http://192.168.56.102:3000/api/v1/updateline', {
+      this.$axios.post(this.$api.getURL('updateline'), {
         room_id: room_id,
         user_id: user_id,
         data: {

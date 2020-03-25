@@ -32,6 +32,18 @@ spec:
       - image: chatc3-frontend-nginx:latest
         name: nginx
         imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: nginx-env
         ports:
         - containerPort: 80
           name: nginx
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-env
+  namespace: chatc3
+data:
+  APISERVER_HOST: "rails"
+  APISERVER_PORT: "3000"

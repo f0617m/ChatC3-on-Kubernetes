@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     getImage(){
-      this.$axios.post('http://192.168.56.102:3000/api/v1/getImageName',{
+      this.$axios.post(this.$api.getURL('getImageName'),{
         token: this.token
       })
       .then(response => {
@@ -116,7 +116,7 @@ export default {
         return
       }
 
-      this.$axios.post('http://192.168.56.102:3000/api/v1/sendMessage', {
+      this.$axios.post(this.$api.getURL('sendMessage'), {
         message: content,
         user_id: this.userid,
         user_name: '',

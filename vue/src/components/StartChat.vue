@@ -49,6 +49,8 @@
 </template>
 
 <script>
+//import apiserver2 from '../apiserver.js'
+
 export default {
   name: 'startchat',
   data () {
@@ -69,7 +71,7 @@ export default {
   },
   methods: {
     findRoom(){
-      this.$axios.get('http://192.168.56.102:3000/api/v1/getRoom')
+      this.$axios.get(this.$api.getURL('getRoom'))
       .then(response => {
         if(response.data == null){
           this.createRoom()
@@ -82,7 +84,7 @@ export default {
       })
     },
     createRoom(){
-      this.$axios.post('http://192.168.56.102:3000/api/v1/rooms', {
+      this.$axios.post(this.$api.getURL('rooms'), {
         room: {
           status: 'Waiting'
         }
@@ -97,7 +99,7 @@ export default {
       })
     },
     joinRoom(roomId){
-        this.$axios.post('http://192.168.56.102:3000/api/v1/setRoomId', {
+        this.$axios.post(this.$api.getURL('setRoomId'), {
           user_id: this.$store.getters['auth/getUserId'],
           room_id: roomId
         })

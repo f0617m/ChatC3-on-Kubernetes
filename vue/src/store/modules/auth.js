@@ -1,4 +1,7 @@
 import axios from 'axios'
+import Apiserver from '../../apiserver.js'
+
+const api = Apiserver
 
 export default{
   namespaced: true,
@@ -65,7 +68,7 @@ export default{
     create ({ commit }, data){
       console.log(data)
       return new Promise((resolve, reject) => {
-        axios.post('http://192.168.56.102:3000/api/v1/users', data
+        axios.post(api.getURL('users'), data
         ).then(response => {
           console.log(response)
           commit('create', response)
@@ -77,7 +80,7 @@ export default{
     },
     login ({ commit }, data){
       return new Promise((resolve, reject) => {
-        axios.post('http://192.168.56.102:3000/api/v1/login', data
+        axios.post(api.getURL('login'), data
         ).then(response => {
           commit('login', response)
           resolve(response)
@@ -89,7 +92,7 @@ export default{
     },
     tokenLogin ({ commit }, data){
       return new Promise((resolve, reject) => {
-        axios.post('http://192.168.56.102:3000/api/v1/tokenLogin', data
+        axios.post(api.getURL('tokenLogin'), data
         ).then(response => {
           commit('login', response)
           resolve(response)

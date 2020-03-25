@@ -126,6 +126,7 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 
 const axios = Axios
+axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 Vue.prototype.$axios = axios
 
 Vue.use(VueAxios, Axios)
@@ -216,7 +217,7 @@ export default {
       }
     },
     getImage(){
-      this.$axios.post('http://192.168.56.102:3000/api/v1/getImageName',{
+      this.$axios.post(this.$api.getURL('getImageName'),{
         token: this.token
       })
       .then(response => {
@@ -280,7 +281,7 @@ export default {
 
       formData.append("user_id", this.userid)
       formData.append("image_name", file)
-      this.$axios.post('http://192.168.56.102:3000/api/v1/uploadImage',formData)
+      this.$axios.post(this.$api.getURL('uploadImage'),formData)
       .then(response => {
         this.imageButton = false;
         this.setImage(response.data.image_name.url)
@@ -325,7 +326,7 @@ export default {
       let answer = window.confirm('ユーザ名を更新してもよいですか？')
 
       if(answer){
-        this.$axios.post('http://192.168.56.102:3000/api/v1/updateName',{
+        this.$axios.post(this.$api.getURL('updateName'),{
           user_id: this.userid,
           name: this.af_username
         })
@@ -343,12 +344,12 @@ export default {
       let answer = window.confirm('パスワードを更新してもよいですか？')
 
       if(answer){
-        this.$axios.post('http://192.168.56.102:3000/api/v1/checkPassword',{
+        this.$axios.post(this.$api.getURL('checkPassword'),{
           user_id: this.userid,
           password: this.be_password
         })
         .then(response => {
-          this.$axios.post('http://192.168.56.102:3000/api/v1/updatePassword',{
+          this.$axios.post(this.$api.getURL('updatePassword'),{
             user_id: this.userid,
             password: this.af_password
           })
