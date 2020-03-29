@@ -1,5 +1,7 @@
-const apihost = process.env.APISERVER_HOST || 'rails'
-const apiport = process.env.APISERVER_PORT || '3000'
+const apihost = process.env.APISERVER_HOST || 'localhost'
+const apiport = process.env.APISERVER_PORT || '80'
+
+console.log(process.env)
 
 export default {
   host: apihost,
