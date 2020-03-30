@@ -1,5 +1,5 @@
-const apihost = process.env.APISERVER_HOST || 'localhost'
-const apiport = process.env.APISERVER_PORT || '80'
+const apihost = process.env.APISERVER_HOST || '192.168.56.102'
+const apiport = process.env.APISERVER_PORT || '30080'
 
 console.log(process.env)
 
