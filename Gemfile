@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'actioncable'
 gem 'rails-i18n'
 gem 'carrierwave'
+gem 'carrierwave-ftp', :require => 'carrierwave/storage/ftp/all'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'

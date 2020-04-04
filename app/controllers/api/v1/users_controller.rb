@@ -48,6 +48,7 @@ module Api
         p 'きてますよおおおおおおおおおおおおおおおおお？？？？？？？'
         p params
         @user = User.find_by(token:params[:token])
+        p @user.image_name
 
         if @user
           render json: @user, status: :created

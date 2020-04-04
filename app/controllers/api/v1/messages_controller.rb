@@ -31,7 +31,7 @@ module Api
             message: message.message,
             user_id: message.user_id,
             user_name: @user.name,
-            image_name: @user.image_name,
+            image_name: @user.image_name.url,
             room_id: message.room_id
           )
         end
@@ -71,18 +71,14 @@ module Api
         if @message.save
           render json: @message
 
-          p 'params なかみいいい１'
-          p params
-          p 'params なかみいいい１'
-
           @user = User.find_by(user_id: params['user_id'])
+          p @user
+          p 'せんどっどおおおおお'
+          p @user.image_name
+          p 'せんどっどおおおおお'
           if @user
             params['user_name'] = @user.name
-            params['image_name'] = @user.image_name
-
-            p 'params なかみいいい２'
-            p params
-            p 'params なかみいいい２'
+            params['image_name'] = @user.image_name.url
 
             ActionCable.server.broadcast "messages_#{params['room_id']}",
             params

@@ -69,10 +69,13 @@ export default {
     },
     imagename(){
       let url = this.$store.getters['auth/getImageName']
-      let index = url.indexOf('/user')
-      url = url.substring(index)
-      url = decodeURI(url)
+      console.log('Chat.vue imagename')
+      console.log(url)
       if(url){
+        let index = url.indexOf('/public')
+        url = url.substring(index)
+        url = decodeURI(url)
+        console.log(url)
         return url
       }
     },

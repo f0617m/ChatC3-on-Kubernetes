@@ -193,10 +193,13 @@ export default {
     },
     be_imagename(){
       let url = this.$store.getters['auth/getImageName']
+      console.log('be_imagename')
+      console.log(url)
       if(url){
-        let index = url.indexOf('/user')
+        let index = url.indexOf('/public')
         url = url.substring(index)
         url = decodeURI(url)
+        console.log(url)
         return url
       }
     },
@@ -259,7 +262,6 @@ export default {
       let reader = new FileReader()
 
       if(answer){
-        console.log('answer yes')
         fetch(this.defaultimage)
         .then(response => response.blob())
         .then(blob => new File([blob], "default.jpg"))

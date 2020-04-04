@@ -45,5 +45,5 @@ metadata:
   name: nginx-env
   namespace: chatc3
 data:
-  APISERVER_HOST: "nginx"
-  APISERVER_PORT: "8080"
+  APISERVER_HOST: "192.168.56.102"
+  APISERVER_PORT: "30080"
