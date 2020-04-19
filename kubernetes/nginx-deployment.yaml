@@ -4,12 +4,13 @@ metadata:
   name: nginx
   namespace: chatc3
 spec:
-  type: LoadBalancer
+  #type: LoadBalancer
+  type: ClusterIP
   ports:
   - protocol: TCP
-    port: 8080
+    name: http
+    port: 80
     targetPort: 80
-    nodePort: 30080
   selector:
     app: nginx
 ---
@@ -45,5 +46,5 @@ metadata:
   name: nginx-env
   namespace: chatc3
 data:
-  APISERVER_HOST: "192.168.56.102"
-  APISERVER_PORT: "30080"
+  APISERVER_HOST: "chatc3.net"
+  APISERVER_PORT: "32115"

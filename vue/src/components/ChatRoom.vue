@@ -71,7 +71,7 @@ Vue.prototype.$axios = axios
 const api = Apiserver
 Vue.prototype.$api = api
 
-const cable = ActionCable.createConsumer('ws:' + api.host + ':' + api.port + '/cable')
+const cable = ActionCable.createConsumer('wss:' + api.host + ':' + api.port + '/cable')
 Vue.prototype.$cable = cable
 
 Vue.use(VueAxios, Axios)
