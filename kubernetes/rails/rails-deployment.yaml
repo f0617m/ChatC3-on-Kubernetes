@@ -42,9 +42,9 @@ spec:
         command:
         - sh
         - -c
-        - "bundle exec rails db:create \
+        - "bundle exec rails db:create RAILS_ENV=production \
           && bundle exec rails db:migrate \
-          && bundle exec rails server -b 0.0.0.0" 
+          && bundle exec rails server -e production" 
       volumes:
       - name: rails-persistent-storage
         persistentVolumeClaim:
@@ -60,3 +60,4 @@ data:
   MYSQL_USER: root
   MYSQL_PASSWORD: rails
   RAILS_ROOT: /webapp
+  ALLOWED_REQUEST_ORIGINS: https://chatc3.net:32115

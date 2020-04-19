@@ -1,5 +1,5 @@
-const apihost = process.env.APISERVER_HOST || 'chatc3.net'
-const apiport = process.env.APISERVER_PORT || '32115'
+const apihost = process.env.VUE_APP_APISERVER_HOST
+const apiport = process.env.VUE_APP_APISERVER_PORT
 
 console.log(process.env)
 

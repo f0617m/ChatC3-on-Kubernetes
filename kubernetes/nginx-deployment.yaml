@@ -46,5 +46,4 @@ metadata:
   name: nginx-env
   namespace: chatc3
 data:
-  APISERVER_HOST: "chatc3.net"
-  APISERVER_PORT: "32115"
+  VUE_APP_TEST: "chatc3.net"

@@ -109,6 +109,7 @@ export default {
     this.$vuetify.theme.light = true
     this.contents = this.originalcontents
     this.$axios.defaults.headers.common['Authorization'] = "Token " + this.token;
+    console.log(process.env)
   },
   beforeRouteUpdate (to, from, next) {
     //再描画前のアクション
