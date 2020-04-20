@@ -31,9 +31,13 @@ spec:
       - image: mysql:5.6
         name: mysql
         env:
-          # Use secret in real usage
-        - name: MYSQL_ROOT_PASSWORD
-          value: rails
+          - name: TZ
+            value: Asia/Tokyo
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysqlpassword
         ports:
         - containerPort: 3306
           name: mysql

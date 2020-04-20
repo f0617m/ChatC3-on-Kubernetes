@@ -33,6 +33,9 @@ spec:
       - image: chatc3-frontend-nginx:latest
         name: nginx
         imagePullPolicy: Never
+        env:
+          - name: TZ
+            value: Asia/Tokyo
         envFrom:
         - configMapRef:
             name: nginx-env

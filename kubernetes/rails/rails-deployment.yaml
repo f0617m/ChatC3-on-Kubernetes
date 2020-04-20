@@ -29,6 +29,29 @@ spec:
       containers:
       - image: chatc3-backend-rails:latest
         name: rails
+        env:
+          - name: TZ
+            value: Asia/Tokyo
+          - name: MYSQL_HOST
+            valueFrom:
+              secretKeyRef:
+                name: rails-secret
+                key: mysqlhost
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: rails-secret
+                key: mysqluser
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: rails-secret
+                key: mysqlpassword
+          - name: ALLOWED_REQUEST_ORIGINS
+            valueFrom:
+              secretKeyRef:
+                name: rails-secret
+                key: allowedrequestorigins
         imagePullPolicy: Never
         envFrom:
         - configMapRef:
@@ -56,8 +79,4 @@ metadata:
   name: rails-env
   namespace: chatc3
 data:
-  MYSQL_HOST: mysql
-  MYSQL_USER: root
-  MYSQL_PASSWORD: rails
   RAILS_ROOT: /webapp
-  ALLOWED_REQUEST_ORIGINS: https://chatc3.net:32115
