@@ -7,7 +7,7 @@ ClassLength:
 CyclomaticComplexity:
   Enabled: false
 
-HandleExceptions:
+SuppressedException:
   Enabled: false
 
 LineLength:
