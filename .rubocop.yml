@@ -34,3 +34,6 @@ Bundler/OrderedGems:
 
 Lint/ShadowedException:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
