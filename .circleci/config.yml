@@ -2,7 +2,7 @@ version: 2
 jobs:
   rubocop:
     docker:
-      - image: circleci/ruby:2.6.0-node-browsers-legacy
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
         environment:
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
@@ -17,6 +17,7 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
@@ -45,6 +46,7 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
