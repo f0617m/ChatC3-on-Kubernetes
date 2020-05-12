@@ -7,23 +7,21 @@ class RoomChannel < ApplicationCable::Channel
 
     @user = User.find_by(user_id: params['user_id'])
 
-    if @user
-      count = User.where(room_id: params['room_id']).count
+    return if @user.blank?
 
-      @room = Room.find_by(id: params['room_id'])
+    count = User.where(room_id: params['room_id']).count
 
-      case count
-      when 0 then
-        @room.status = 'Finished'
-      when 1 then
-        @room.status = 'Waiting'
-      when 2 then
-        @room.status = 'Plaing'
-        startChat
-      end
+    @room = Room.find_by(id: params['room_id'])
 
-      @room.save
+    case count
+    when 0 then @room.status = 'Finished'
+    when 1 then @room.status = 'Waiting'
+    when 2 then
+      @room.status = 'Plaing'
+      startChat
     end
+
+    @room.save
   end
 
   def unsubscribed
@@ -36,13 +34,11 @@ class RoomChannel < ApplicationCable::Channel
     @room = Room.find_by(id: params['room_id'])
 
     case count
-    when 0 then
-      @room.status = 'Finished'
+    when 0 then @room.status = 'Finished'
     when 1 then
       @room.status = 'Finished'
       removeRoom
-    when 2 then
-      @room.status = 'Plaing'
+    when 2 then @room.status = 'Plaing'
     end
  
     @room.save
