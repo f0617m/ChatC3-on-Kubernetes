@@ -3,7 +3,7 @@ module Api
     class MessagesController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :set_message, only: %i[:show, :update, :destroy]
+      before_action :set_message, only: %i[show update destroy]
       before_action :authenticate
 
       # GET /messages
@@ -44,11 +44,10 @@ module Api
       def create
         @message = Message.new(message_params)
 
-        if @message.save
-          render json: @message, status: :created, location: @message
-        else
-          render json: @message.errors, status: :unprocessable_entity
-        end
+        if @message.save? render json: @message, status: :created, location: @message and return
+          
+        render json: @message.errors, status: :unprocessable_entity
+
       end
 
       # PATCH/PUT /messages/1
