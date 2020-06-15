@@ -3,7 +3,7 @@ module Api
     class MessagesController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :set_message, only: [:show, :update, :destroy]
+      before_action :set_message, only: %i[:show, :update, :destroy]
       before_action :authenticate
 
       # GET /messages
@@ -72,10 +72,7 @@ module Api
           render json: @message
 
           @user = User.find_by(user_id: params['user_id'])
-          p @user
-          p 'せんどっどおおおおお'
-          p @user.image_name
-          p 'せんどっどおおおおお'
+
           if @user
             params['user_name'] = @user.name
             params['image_name'] = @user.image_name.url

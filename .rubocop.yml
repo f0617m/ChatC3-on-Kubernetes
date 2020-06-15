@@ -40,3 +40,6 @@ Style/FrozenStringLiteralComment:
 
 MethodName:
   EnforcedStyle: camelCase
+
+Naming/VariableName:
+  EnforcedStyle: camelCase
