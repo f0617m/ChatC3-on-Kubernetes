@@ -40,3 +40,7 @@ Style/FrozenStringLiteralComment:
 
 MethodName:
   EnforcedStyle: camelCase
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 20
