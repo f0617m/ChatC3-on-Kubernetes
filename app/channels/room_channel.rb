@@ -40,7 +40,7 @@ class RoomChannel < ApplicationCable::Channel
       removeRoom
     when 2 then @room.status = 'Plaing'
     end
- 
+
     @room.save
   end
 
