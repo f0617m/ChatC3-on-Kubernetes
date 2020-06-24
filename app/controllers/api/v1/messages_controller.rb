@@ -72,19 +72,19 @@ module Api
       def talk
         @message = Message.new(message: params['message'], user_id: params['user_id'], room_id: params['room_id'])
 
-        unless @message.save return
-
-        render json: @message
-        @user = User.find_by(user_id: params['user_id'])
-
-        unless @user return
-
-        params['user_name'] = @user.name
-        params['image_name'] = @user.image_name.url
-
-        ActionCable.server.broadcast "messages_#{params['room_id']}",
-        params
-        head :ok
+        if @message.save
+          render json: @message
+          @user = User.find_by(user_id: params['user_id'])
+  
+          return if @user.blank?
+  
+          params['user_name'] = @user.name
+          params['image_name'] = @user.image_name.url
+  
+          ActionCable.server.broadcast "messages_#{params['room_id']}",
+          params
+          head :ok
+        end
       end
 
       def authenticate
