@@ -72,12 +72,12 @@ module Api
       def talk
         @message = Message.new(message: params['message'], user_id: params['user_id'], room_id: params['room_id'])
 
-        return false if @message.save?
+        unless @message.save return
 
         render json: @message
         @user = User.find_by(user_id: params['user_id'])
 
-        return false if @user?
+        unless @user return
 
         params['user_name'] = @user.name
         params['image_name'] = @user.image_name.url
