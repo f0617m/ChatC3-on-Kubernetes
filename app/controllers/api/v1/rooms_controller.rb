@@ -28,14 +28,14 @@ module Api
       def create
         @room = Room.new(room_params)
 
-        render json: @room, status: :created if @room.save? and return
+        render json: @room, status: :created and return if @room.save?
 
         render json: @room.errors, status: :unprocessable_entity
       end
 
       # PATCH/PUT /rooms/1
       def update
-        render json: @room if @room.update(room_params)? and return
+        render json: @room and return if @room.update(room_params)?
 
         render json: @room.errors, status: :unprocessable_entity
       end

@@ -22,7 +22,7 @@ module Api
       def create
         @user = User.new(user_params)
 
-        render json: @user, status: :created if @user.save? and return
+        render json: @user, status: :created and return if @user.save?
 
         render json: @user.errors.full_messages, status: :unprocessable_entity
       end
@@ -31,7 +31,7 @@ module Api
       def login
         @user = User.find_by(user_id:params[:user_id])
 
-        render json: @user, status: :created if (@user && @user.authenticate(params[:password]))? and return
+        render json: @user, status: :created and return if (@user && @user.authenticate(params[:password]))?
 
         render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
       end
@@ -40,7 +40,7 @@ module Api
       def tokenLogin
         @user = User.find_by(token:params[:token])
 
-        render json: @user, status: :created if @user? and return
+        render json: @user, status: :created and return if @user?
 
         render plain: "tokenが不正です", status: :unprocessable_entity
       end
@@ -49,7 +49,7 @@ module Api
       def checkPassword
         @user = User.find_by(user_id:params[:user_id])
 
-        render json: @user, status: :created if (@user && @user.authenticate(params[:password]))? and return
+        render json: @user, status: :created and return if (@user && @user.authenticate(params[:password]))?
 
         render json: @user.errors, status: :unprocessable_entity
       end
@@ -57,7 +57,7 @@ module Api
       # PATCH/PUT /users/1
       def update
 
-        render json: @user if @user.update(user_params)? and return
+        render json: @user and return if @user.update(user_params)?
 
         render json: @user.errors, status: :unprocessable_entity
       end
