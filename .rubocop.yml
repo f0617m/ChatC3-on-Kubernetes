@@ -12,7 +12,7 @@ AllCops:
     - "Gemfile*"
 
   DisplayCopNames: true
-  TargetRubyVersion: 2.6.0
+  TargetRubyVersion: 2.6.3
 
 Style/AndOr:
   EnforcedStyle: conditionals
@@ -36,7 +36,7 @@ Lint/ShadowedException:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: true
+  Enabled: false
 
 MethodName:
   EnforcedStyle: camelCase
