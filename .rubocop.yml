@@ -42,4 +42,7 @@ MethodName:
   EnforcedStyle: camelCase
 
 Naming/VariableName:
-  EnforcedStyle: camelCase
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
