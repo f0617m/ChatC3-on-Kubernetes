@@ -44,7 +44,7 @@ module Api
       def create
         @message = Message.new(message_params)
 
-        render json: @message, status: :created, location: @message if @message.save?
+        render json: @message, status: :created, location: @message if @message.save? and return
 
         render json: @message.errors, status: :unprocessable_entity
 
@@ -52,11 +52,9 @@ module Api
 
       # PATCH/PUT /messages/1
       def update
-        if @message.update(message_params)
-          render json: @message
-        else
-          render json: @message.errors, status: :unprocessable_entity
-        end
+        render json: @message if @message.update(message_params)? and return
+
+        render json: @message.errors, status: :unprocessable_entity
       end
 
       # DELETE /messages/1
@@ -67,6 +65,7 @@ module Api
       # POST /sendMessage
       def talk
         @message = Message.new(message: params['message'], user_id: params['user_id'], room_id: params['room_id'])
+
         if @message.save
           render json: @message
 
