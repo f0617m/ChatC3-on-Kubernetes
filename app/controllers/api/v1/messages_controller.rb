@@ -44,18 +44,22 @@ module Api
       def create
         @message = Message.new(message_params)
 
-        render json: @message.errors, status: :unprocessable_entity
+        if @message.save
+          render json: @message, status: :created, location: @message
+        else
+          render json: @message.errors, status: :unprocessable_entity
+        end
 
-        render json: @message, status: :created, location: @message if @message.save?
-        
       end
 
       # PATCH/PUT /messages/1
       def update
 
-        render json: @message.errors, status: :unprocessable_entity
-
-        render json: @message if @message.update(message_params)?
+        if @message.update(message_params)
+          render json: @message
+        else
+          render json: @message.errors, status: :unprocessable_entity
+        end
 
       end
 
