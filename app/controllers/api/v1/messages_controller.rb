@@ -47,6 +47,7 @@ module Api
         render json: @message.errors, status: :unprocessable_entity
 
         render json: @message, status: :created, location: @message if @message.save?
+        
       end
 
       # PATCH/PUT /messages/1
@@ -55,6 +56,7 @@ module Api
         render json: @message.errors, status: :unprocessable_entity
 
         render json: @message if @message.update(message_params)?
+
       end
 
       # DELETE /messages/1
