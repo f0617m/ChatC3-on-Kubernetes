@@ -44,19 +44,23 @@ module Api
       def create
         @message = Message.new(message_params)
 
-        if @message.save? render json: @message, status: :created, location: @message and return
-          
-        render json: @message.errors, status: :unprocessable_entity
+        if @message.save
+          render json: @message, status: :created, location: @message
+        else
+          render json: @message.errors, status: :unprocessable_entity
+        end
 
       end
 
       # PATCH/PUT /messages/1
       def update
+
         if @message.update(message_params)
           render json: @message
         else
           render json: @message.errors, status: :unprocessable_entity
         end
+
       end
 
       # DELETE /messages/1
@@ -67,20 +71,20 @@ module Api
       # POST /sendMessage
       def talk
         @message = Message.new(message: params['message'], user_id: params['user_id'], room_id: params['room_id'])
-        if @message.save
-          render json: @message
 
-          @user = User.find_by(user_id: params['user_id'])
+        return unless @message.save
 
-          if @user
-            params['user_name'] = @user.name
-            params['image_name'] = @user.image_name.url
+        render json: @message
+        @user = User.find_by(user_id: params['user_id'])
 
-            ActionCable.server.broadcast "messages_#{params['room_id']}",
-            params
-            head :ok
-          end
-        end
+        return if @user.blank?
+
+        params['user_name'] = @user.name
+        params['image_name'] = @user.image_name.url
+
+        ActionCable.server.broadcast "messages_#{params['room_id']}",
+        params
+        head :ok
       end
 
       def authenticate
