@@ -20,93 +20,69 @@ module Api
 
       # POST /users
       def create
-        p 'createeeeeeeeeeeeeeeeeeeee▽'
-        p user_params
-        p 'createeeeeeeeeeeeeeeeeeeee△'
         @user = User.new(user_params)
 
-        if @user.save
-          render json: @user, status: :created
-        else
-          render json: @user.errors.full_messages, status: :unprocessable_entity
-        end
+        render json: @user, status: :created if @user.save? and return
+
+        render json: @user.errors.full_messages, status: :unprocessable_entity
       end
 
       # POST /login
       def login
         @user = User.find_by(user_id:params[:user_id])
 
-        if @user && @user.authenticate(params[:password])
-          render json: @user, status: :created
-        else
-          render plain: 'IDまたはパスワードが異なります', status: :unprocessable_entity
-        end
+        render json: @user, status: :created if (@user && @user.authenticate(params[:password]))? and return
+
+        render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
       end
 
       # POST /tokenLogin
       def tokenLogin
-        p 'きてますよおおおおおおおおおおおおおおおおお？？？？？？？'
-        p params
         @user = User.find_by(token:params[:token])
-        p @user.image_name
 
-        if @user
-          render json: @user, status: :created
-        else
-          render plain: 'tokenが不正です', status: :unprocessable_entity
-        end
+        render json: @user, status: :created if @user? and return
+
+        render plain: "tokenが不正です", status: :unprocessable_entity
       end
 
       # POST /checkPassword
       def checkPassword
         @user = User.find_by(user_id:params[:user_id])
 
-        if @user && @user.authenticate(params[:password])
-          render json: @user, status: :created
-        else
-          render json: @user.errors, status: :unprocessable_entity
-        end
+        render json: @user, status: :created if (@user && @user.authenticate(params[:password]))? and return
+
+        render json: @user.errors, status: :unprocessable_entity
       end
 
       # PATCH/PUT /users/1
       def update
-        if @user.update(user_params)
-          render json: @user
-        else
-          render json: @user.errors, status: :unprocessable_entity
-        end
+
+        render json: @user if @user.update(user_params)? and return
+
+        render json: @user.errors, status: :unprocessable_entity
       end
 
       # POST /getRoomId
       def getRoomId
-        p params[:user_id]
-
         @user = User.find_by(user_id:params[:user_id])
 
-        if @user
-          render json: @user.room_id
-        end
+        render json: @user.room_id if @user?
       end
 
       #POST /getImageName
       def getImageName
-        p params[:user_id]
-
         @user = User.find_by(token:params[:token])
 
-        if @user
-          render json: @user.image_name
-        end
+        render json: @user.image_name if @user?
       end
 
       def uploadImage
-        #raise ArgumentError, 'invalid params' if params[:image_name].blank? || params[:user_id].blank?
         @user = User.find_by(user_id:params[:user_id])
+
         if @user
-          #@user.image_name = params[:user_id] + '/' + params[:image_name]
+
           @user.image_name = params[:image_name]
-          p @user
-          @user.save!
+          @user.save
 
           render json: {
             user_id: @user.user_id,
@@ -116,16 +92,17 @@ module Api
       end
 
       def updateName
-          @user = User.find_by(user_id:params[:user_id])
-          if @user
-            @user.name = params[:name]
-            @user.save!
+        @user = User.find_by(user_id:params[:user_id])
+        
+        if @user
+          @user.name = params[:name]
+          @user.save!
 
-            render json: {
-              user_id: @user.user_id,
-              name: @user.name
-            }
-          end
+          render json: {
+            user_id: @user.user_id,
+            name: @user.name
+          }
+        end
       end
 
       def updatePassword

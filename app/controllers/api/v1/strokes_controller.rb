@@ -29,20 +29,17 @@ module Api
       def create
         @stroke = Stroke.new(stroke_params)
 
-        if @stroke.save
-          render json: @stroke, status: :created, location: @stroke
-        else
-          render json: @stroke.errors, status: :unprocessable_entity
-        end
+        render json: @stroke, status: :created, location: @stroke if @stroke.save? and return
+
+        render json: @stroke.errors, status: :unprocessable_entity
       end
 
       # PATCH/PUT /strokes/1
       def update
-        if @stroke.update(stroke_params)
-          render json: @stroke
-        else
-          render json: @stroke.errors, status: :unprocessable_entity
-        end
+
+        render json: @stroke if @stroke.update(stroke_params)? and return
+
+        render json: @stroke.errors, status: :unprocessable_entity
       end
 
       # DELETE /strokes/1
