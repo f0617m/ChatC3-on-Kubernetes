@@ -4,7 +4,7 @@ module Api
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
       before_action :set_user, only: %i[show update destroy]
-      before_action :authenticate, except: [:create, :login]
+      before_action :authenticate, except: %i[create login]
 
       # GET /users
       def index
@@ -31,9 +31,9 @@ module Api
 
       # POST /login
       def login
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
-        if (@user && @user.authenticate(params[:password]))
+        if @user && @user.authenticate(params[:password])
           render json: @user, status: :created
         else
           render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
@@ -42,7 +42,7 @@ module Api
 
       # POST /tokenLogin
       def tokenLogin
-        @user = User.find_by(token:params[:token])
+        @user = User.find_by(token: params[:token])
 
         if @user
           render json: @user, status: :created
@@ -53,9 +53,9 @@ module Api
 
       # POST /checkPassword
       def checkPassword
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
-        if (@user && @user.authenticate(params[:password]))
+        if @user && @user.authenticate(params[:password])
           render json: @user, status: :created
         else
           render json: @user.errors, status: :unprocessable_entity
@@ -74,7 +74,7 @@ module Api
 
       # POST /getRoomId
       def getRoomId
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
         return if @user.blank?
 
@@ -83,7 +83,7 @@ module Api
 
       #POST /getImageName
       def getImageName
-        @user = User.find_by(token:params[:token])
+        @user = User.find_by(token: params[:token])
 
         return if @user.blank?
 
@@ -91,7 +91,7 @@ module Api
       end
 
       def uploadImage
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
         if @user
 
@@ -106,7 +106,7 @@ module Api
       end
 
       def updateName
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
         
         if @user
           @user.name = params[:name]
@@ -120,7 +120,7 @@ module Api
       end
 
       def updatePassword
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
         if @user
           @user.password = params[:password]
           @user.save!
@@ -134,7 +134,7 @@ module Api
 
       # POST /setRoomId
       def setRoomId
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
         if @user
           @user.room_id = params[:room_id]
           @user.save
