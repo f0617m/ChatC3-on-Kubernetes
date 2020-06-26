@@ -92,13 +92,13 @@ module Api
 
       private
 
-        def set_message
-          @message = Message.find(params[:id])
-        end
+      def set_message
+        @message = Message.find(params[:id])
+      end
 
-        def message_params
-          params.require(:message).permit(:message)
-        end
+      def message_params
+        params.require(:message).permit(:message)
+      end
     end
   end
 end

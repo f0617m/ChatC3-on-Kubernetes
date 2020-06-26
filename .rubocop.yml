@@ -46,3 +46,6 @@ Naming/VariableName:
 
 Lint/UnusedBlockArgument:
   Enabled: false
+
+Style/NonNilCheck:
+  Enabled: false

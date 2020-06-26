@@ -62,11 +62,12 @@ module Api
       def authenticate
         authenticate_or_request_with_http_token do |token,options|
           auth_user = User.find_by(token: token)
-          auth_user != nil ? true : false
+          auth_user != nil
         end
       end
 
       private
+
         # Use callbacks to share common setup or constraints between actions.
         def set_room
           @room = Room.find(params[:id])
