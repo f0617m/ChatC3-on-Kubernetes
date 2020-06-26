@@ -22,44 +22,54 @@ module Api
       def create
         @user = User.new(user_params)
 
-        render json: @user, status: :created and return if @user.save?
-
-        render json: @user.errors.full_messages, status: :unprocessable_entity
+        if @user.save
+          render json: @user, status: :created
+        else
+          render json: @user.errors.full_messages, status: :unprocessable_entity
+        end
       end
 
       # POST /login
       def login
         @user = User.find_by(user_id:params[:user_id])
 
-        render json: @user, status: :created and return if (@user && @user.authenticate(params[:password]))?
-
-        render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
+        if (@user && @user.authenticate(params[:password]))
+          render json: @user, status: :created
+        else
+          render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
+        end
       end
 
       # POST /tokenLogin
       def tokenLogin
         @user = User.find_by(token:params[:token])
 
-        render json: @user, status: :created and return if @user?
-
-        render plain: "tokenが不正です", status: :unprocessable_entity
+        if @user
+          render json: @user, status: :created
+        else
+          render plain: "tokenが不正です", status: :unprocessable_entity
+        end 
       end
 
       # POST /checkPassword
       def checkPassword
         @user = User.find_by(user_id:params[:user_id])
 
-        render json: @user, status: :created and return if (@user && @user.authenticate(params[:password]))?
-
-        render json: @user.errors, status: :unprocessable_entity
+        if (@user && @user.authenticate(params[:password]))
+          render json: @user, status: :created
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
 
       # PATCH/PUT /users/1
       def update
 
-        render json: @user and return if @user.update(user_params)?
-
-        render json: @user.errors, status: :unprocessable_entity
+        if @user.update(user_params)
+          render json: @user
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
 
       # POST /getRoomId
