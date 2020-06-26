@@ -76,14 +76,18 @@ module Api
       def getRoomId
         @user = User.find_by(user_id:params[:user_id])
 
-        render json: @user.room_id if @user?
+        return if @user.blank?
+
+        render json: @user.room_id
       end
 
       #POST /getImageName
       def getImageName
         @user = User.find_by(token:params[:token])
 
-        render json: @user.image_name if @user?
+        return if @user.blank?
+
+        render json: @user.image_name
       end
 
       def uploadImage
