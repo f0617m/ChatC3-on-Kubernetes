@@ -3,8 +3,8 @@ module Api
     class UsersController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :set_user, only: [:show, :update, :destroy]
-      before_action :authenticate, except: [:create, :login]
+      before_action :set_user, only: %i[show update destroy]
+      before_action :authenticate, except: %i[create login]
 
       # GET /users
       def index
@@ -22,109 +22,123 @@ module Api
       def create
         @user = User.new(user_params)
 
-        render json: @user, status: :created and return if @user.save?
-
-        render json: @user.errors.full_messages, status: :unprocessable_entity
+        if @user.save
+          render json: @user, status: :created
+        else
+          render json: @user.errors.full_messages, status: :unprocessable_entity
+        end
       end
 
       # POST /login
       def login
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
-        render json: @user, status: :created and return if (@user && @user.authenticate(params[:password]))?
-
-        render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
+        if @user && @user.authenticate(params[:password])
+          render json: @user, status: :created
+        else
+          render plain: 'IDまたはパスワードが異なります', status: :unprocessable_entity
+        end
       end
 
       # POST /tokenLogin
       def tokenLogin
-        @user = User.find_by(token:params[:token])
+        @user = User.find_by(token: params[:token])
 
-        render json: @user, status: :created and return if @user?
-
-        render plain: "tokenが不正です", status: :unprocessable_entity
+        if @user
+          render json: @user, status: :created
+        else
+          render plain: 'tokenが不正です', status: :unprocessable_entity
+        end
       end
 
       # POST /checkPassword
       def checkPassword
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
-        render json: @user, status: :created and return if (@user && @user.authenticate(params[:password]))?
-
-        render json: @user.errors, status: :unprocessable_entity
+        if @user && @user.authenticate(params[:password])
+          render json: @user, status: :created
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
 
       # PATCH/PUT /users/1
       def update
-
-        render json: @user and return if @user.update(user_params)?
-
-        render json: @user.errors, status: :unprocessable_entity
+        if @user.update(user_params)
+          render json: @user
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
 
       # POST /getRoomId
       def getRoomId
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
-        render json: @user.room_id if @user?
+        return if @user.blank?
+
+        render json: @user.room_id
       end
 
-      #POST /getImageName
+      # POST /getImageName
       def getImageName
-        @user = User.find_by(token:params[:token])
+        @user = User.find_by(token: params[:token])
 
-        render json: @user.image_name if @user?
+        return if @user.blank?
+
+        render json: @user.image_name
       end
 
       def uploadImage
-        @user = User.find_by(user_id:params[:user_id])
+        @user = User.find_by(user_id: params[:user_id])
 
-        if @user
+        return if @user.blank?
 
-          @user.image_name = params[:image_name]
-          @user.save
+        @user.image_name = params[:image_name]
+        @user.save
 
-          render json: {
-            user_id: @user.user_id,
-            image_name: @user.image_name
-          }
-        end
+        render json: {
+          user_id: @user.user_id,
+          image_name: @user.image_name
+        }
       end
 
       def updateName
-        @user = User.find_by(user_id:params[:user_id])
-        
-        if @user
-          @user.name = params[:name]
-          @user.save!
+        @user = User.find_by(user_id: params[:user_id])
 
-          render json: {
-            user_id: @user.user_id,
-            name: @user.name
-          }
-        end
+        return if @user.blank?
+
+        @user.name = params[:name]
+        @user.save!
+
+        render json: {
+          user_id: @user.user_id,
+          name: @user.name
+        }
       end
 
       def updatePassword
-        @user = User.find_by(user_id:params[:user_id])
-        if @user
-          @user.password = params[:password]
-          @user.save!
+        @user = User.find_by(user_id: params[:user_id])
 
-          render json: {
-            user_id: @user.user_id,
-            name: @user.password
-          }
-        end
+        return if @user.blank?
+
+        @user.password = params[:password]
+        @user.save!
+
+        render json: {
+          user_id: @user.user_id,
+          name: @user.password
+        }
       end
 
       # POST /setRoomId
       def setRoomId
-        @user = User.find_by(user_id:params[:user_id])
-        if @user
-          @user.room_id = params[:room_id]
-          @user.save
-        end
+        @user = User.find_by(user_id: params[:user_id])
+
+        return if @user.blank?
+
+        @user.room_id = params[:room_id]
+        @user.save
       end
 
       # DELETE /users/1
@@ -133,23 +147,24 @@ module Api
       end
 
       def authenticate
-        authenticate_or_request_with_http_token do |token,options|
+        authenticate_or_request_with_http_token do |token, options|
           auth_user = User.find_by(token: token)
-          auth_user != nil ? true : false
+          auth_user != nil
         end
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_user
-          @user = User.find(params[:id])
-        end
 
-        # Only allow a trusted parameter "white list" through.
-        def user_params
-          params.permit(:user_id, :name, :image_name, :password)
-          # params.require(:user).permit(:user_id, :name, :image_name, :password)
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_user
+        @user = User.find(params[:id])
+      end
+
+      # Only allow a trusted parameter "white list" through.
+      def user_params
+        params.permit(:user_id, :name, :image_name, :password)
+        # params.require(:user).permit(:user_id, :name, :image_name, :password)
+      end
     end
   end
 end

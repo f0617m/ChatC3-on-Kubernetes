@@ -39,7 +39,16 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 MethodName:
-  EnforcedStyle: camelCase
+  Enabled: false
 
 Naming/VariableName:
-  EnforcedStyle: camelCase
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Style/NonNilCheck:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false

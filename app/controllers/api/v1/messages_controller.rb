@@ -49,18 +49,15 @@ module Api
         else
           render json: @message.errors, status: :unprocessable_entity
         end
-
       end
 
       # PATCH/PUT /messages/1
       def update
-
         if @message.update(message_params)
           render json: @message
         else
           render json: @message.errors, status: :unprocessable_entity
         end
-
       end
 
       # DELETE /messages/1
@@ -82,28 +79,26 @@ module Api
         params['user_name'] = @user.name
         params['image_name'] = @user.image_name.url
 
-        ActionCable.server.broadcast "messages_#{params['room_id']}",
-        params
+        ActionCable.server.broadcast "messages_#{params['room_id']}", params
         head :ok
       end
 
       def authenticate
-        authenticate_or_request_with_http_token do |token,options|
+        authenticate_or_request_with_http_token do |token, options|
           auth_user = User.find_by(token: token)
-          auth_user != nil ? true : false
+          auth_user != nil
         end
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_message
-          @message = Message.find(params[:id])
-        end
 
-        # Only allow a trusted parameter "white list" through.
-        def message_params
-          params.require(:message).permit(:message)
-        end
+      def set_message
+        @message = Message.find(params[:id])
+      end
+
+      def message_params
+        params.require(:message).permit(:message)
+      end
     end
   end
 end
