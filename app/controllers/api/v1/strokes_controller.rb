@@ -3,7 +3,7 @@ module Api
     class StrokesController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :set_stroke, only: [:show, :update, :destroy]
+      before_action :set_stroke, only: %i[show update destroy]
       before_action :authenticate
 
       # GET /strokes
@@ -60,15 +60,15 @@ module Api
 
       private
 
-        # Use callbacks to share common setup or constraints between actions.
-        def set_stroke
-          @stroke = Stroke.find(params[:id])
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_stroke
+        @stroke = Stroke.find(params[:id])
+      end
 
-        # Only allow a trusted parameter "white list" through.
-        def stroke_params
-          params.require(:stroke).permit(:room_id, :prevx, :prevy, :currx, :curry, :width, :color)
-        end
+      # Only allow a trusted parameter "white list" through.
+      def stroke_params
+        params.require(:stroke).permit(:room_id, :prevx, :prevy, :currx, :curry, :width, :color)
+      end
     end
   end
 end

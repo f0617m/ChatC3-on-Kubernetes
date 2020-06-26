@@ -3,7 +3,7 @@ module Api
     class RoomsController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :set_room, only: [:show, :update, :destroy]
+      before_action :set_room, only: %i[show update destroy]
       before_action :authenticate
 
       # GET /rooms
@@ -20,7 +20,7 @@ module Api
 
       # GET /rooms/find
       def find
-        @room = Room.where(status: "Waiting").order('created_at ASC').first
+        @room = Room.where(status: 'Waiting').order('created_at ASC').first
         render json: @room
       end
 
@@ -50,17 +50,24 @@ module Api
       end
 
       def draw
-        @stroke = Stroke.new(room_id: params['room_id'], prevx: params['data']['fromx'], prevy: params['data']['fromy'],
-           currx: params['data']['tox'], curry: params['data']['toy'], width: params['data']['width'], color: params['data']['color'])
+        @stroke = Stroke.new(
+          room_id: params['room_id'],
+          prevx: params['data']['fromx'],
+          prevy: params['data']['fromy'],
+          currx: params['data']['tox'],
+          curry: params['data']['toy'],
+          width: params['data']['width'],
+          color: params['data']['color']
+        )
+
         @stroke.save
 
-        ActionCable.server.broadcast "lines_#{params['room_id']}",
-        params
+        ActionCable.server.broadcast "lines_#{params['room_id']}", params
         head :ok
       end
 
       def authenticate
-        authenticate_or_request_with_http_token do |token,options|
+        authenticate_or_request_with_http_token do |token, options|
           auth_user = User.find_by(token: token)
           auth_user != nil
         end
@@ -68,15 +75,15 @@ module Api
 
       private
 
-        # Use callbacks to share common setup or constraints between actions.
-        def set_room
-          @room = Room.find(params[:id])
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_room
+        @room = Room.find(params[:id])
+      end
 
-        # Only allow a trusted parameter "white list" through.
-        def room_params
-          params.require(:room).permit(:status)
-        end
+      # Only allow a trusted parameter "white list" through.
+      def room_params
+        params.require(:room).permit(:status)
+      end
     end
   end
 end

@@ -3,7 +3,7 @@ module Api
     class UsersController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :set_user, only: [:show, :update, :destroy]
+      before_action :set_user, only: %i[show update destroy]
       before_action :authenticate, except: [:create, :login]
 
       # GET /users
@@ -151,16 +151,16 @@ module Api
 
       private
 
-        # Use callbacks to share common setup or constraints between actions.
-        def set_user
-          @user = User.find(params[:id])
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_user
+        @user = User.find(params[:id])
+      end
 
-        # Only allow a trusted parameter "white list" through.
-        def user_params
-          params.permit(:user_id, :name, :image_name, :password)
-          # params.require(:user).permit(:user_id, :name, :image_name, :password)
-        end
+      # Only allow a trusted parameter "white list" through.
+      def user_params
+        params.permit(:user_id, :name, :image_name, :password)
+        # params.require(:user).permit(:user_id, :name, :image_name, :password)
+      end
     end
   end
 end
