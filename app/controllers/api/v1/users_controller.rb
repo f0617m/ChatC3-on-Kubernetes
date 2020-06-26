@@ -36,7 +36,7 @@ module Api
         if @user && @user.authenticate(params[:password])
           render json: @user, status: :created
         else
-          render plain: "IDまたはパスワードが異なります", status: :unprocessable_entity
+          render plain: 'IDまたはパスワードが異なります', status: :unprocessable_entity
         end
       end
 
@@ -47,8 +47,8 @@ module Api
         if @user
           render json: @user, status: :created
         else
-          render plain: "tokenが不正です", status: :unprocessable_entity
-        end 
+          render plain: 'tokenが不正です', status: :unprocessable_entity
+        end
       end
 
       # POST /checkPassword
@@ -64,7 +64,6 @@ module Api
 
       # PATCH/PUT /users/1
       def update
-
         if @user.update(user_params)
           render json: @user
         else
@@ -81,7 +80,7 @@ module Api
         render json: @user.room_id
       end
 
-      #POST /getImageName
+      # POST /getImageName
       def getImageName
         @user = User.find_by(token: params[:token])
 
@@ -93,52 +92,53 @@ module Api
       def uploadImage
         @user = User.find_by(user_id: params[:user_id])
 
-        if @user
+        return if @user.blank?
 
-          @user.image_name = params[:image_name]
-          @user.save
+        @user.image_name = params[:image_name]
+        @user.save
 
-          render json: {
-            user_id: @user.user_id,
-            image_name: @user.image_name
-          }
-        end
+        render json: {
+          user_id: @user.user_id,
+          image_name: @user.image_name
+        }
       end
 
       def updateName
         @user = User.find_by(user_id: params[:user_id])
-        
-        if @user
-          @user.name = params[:name]
-          @user.save!
 
-          render json: {
-            user_id: @user.user_id,
-            name: @user.name
-          }
-        end
+        return if @user.blank?
+
+        @user.name = params[:name]
+        @user.save!
+
+        render json: {
+          user_id: @user.user_id,
+          name: @user.name
+        }
       end
 
       def updatePassword
         @user = User.find_by(user_id: params[:user_id])
-        if @user
-          @user.password = params[:password]
-          @user.save!
 
-          render json: {
-            user_id: @user.user_id,
-            name: @user.password
-          }
-        end
+        return if @user.blank?
+
+        @user.password = params[:password]
+        @user.save!
+
+        render json: {
+          user_id: @user.user_id,
+          name: @user.password
+        }
       end
 
       # POST /setRoomId
       def setRoomId
         @user = User.find_by(user_id: params[:user_id])
-        if @user
-          @user.room_id = params[:room_id]
-          @user.save
-        end
+
+        return if @user.blank?
+
+        @user.room_id = params[:room_id]
+        @user.save
       end
 
       # DELETE /users/1

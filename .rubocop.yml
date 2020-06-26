@@ -49,3 +49,6 @@ Lint/UnusedBlockArgument:
 
 Style/NonNilCheck:
   Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
