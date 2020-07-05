@@ -47,7 +47,6 @@ Rails.application.configure do
   # 2019/08/26 これActionCableように追加した。本当なら、hostを指定しないといけない
   config.action_cable.disable_request_forgery_protection = true
 
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
