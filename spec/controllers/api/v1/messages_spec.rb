@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 describe 'PostAPI' do
     it 'getMessagesでMessagesを取得する' do
 

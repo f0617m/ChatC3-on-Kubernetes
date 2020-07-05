@@ -10,6 +10,7 @@ AllCops:
     - "db/migrate/*.rb"
     - "bin/*"
     - "Gemfile*"
+    - "spec*"
 
   DisplayCopNames: true
   TargetRubyVersion: 2.6
