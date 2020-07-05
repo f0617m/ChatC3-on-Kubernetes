@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'PostAPI' do
+describe MessageController do
     it 'getMessagesでMessagesを取得する' do
 
         get "/api/v1/messages/getMessages"
