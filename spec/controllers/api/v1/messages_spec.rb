@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe MessageController do
+describe api::v1::MessagesController do
     it 'getMessagesでMessagesを取得する' do
 
         get "/api/v1/messages/getMessages"
