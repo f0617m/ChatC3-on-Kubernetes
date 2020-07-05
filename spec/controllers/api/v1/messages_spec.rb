@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe MessageController do
     it 'getMessagesでMessagesを取得する' do
