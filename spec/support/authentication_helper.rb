@@ -11,12 +11,13 @@ module AuthenticationHelper
   end
 
   def authenticate
-    p 'test'
+    it 'Auth test' do
+        expect(200).to eq 200
+    end
     return true
   end
 
   def authenticate_or_request_with_http_token
-    p 'test2'
     return true
   end
 end
