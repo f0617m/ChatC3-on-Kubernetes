@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::MessagesController do
+describe 'MessagesController' do
     it 'getMessagesでMessagesを取得する' do
 
     end
