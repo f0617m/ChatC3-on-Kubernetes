@@ -63,5 +63,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # token認証Skipのinclude
-  config.include AuthenticationHelper, authentication: :skip
+  config.include AuthenticationHelper, type: :controller, authentication: :skip
 end
