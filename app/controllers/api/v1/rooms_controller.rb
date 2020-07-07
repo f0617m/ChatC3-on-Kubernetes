@@ -18,7 +18,7 @@ module Api
         render json: @room
       end
 
-      # GET /rooms/find
+      # GET /getRoom
       def find
         @room = Room.where(status: 'Waiting').order('created_at ASC').first
         render json: @room
