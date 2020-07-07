@@ -1,7 +1,7 @@
 module AuthenticationHelper
   extend ActiveSupport::Concern
   
-  self.included do
+  included do
     before do
       controller_mock = double('Controller mock')
       allow(controller_mock).to receive(:authenticate)
