@@ -11,9 +11,6 @@ module AuthenticationHelper
   end
 
   def authenticate
-    it 'Auth test' do
-        expect(200).to eq 200
-    end
     return true
   end
 
