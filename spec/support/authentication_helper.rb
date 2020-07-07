@@ -9,4 +9,8 @@ module AuthenticationHelper
       allow(self).to receive(:authenticate).and_return(controller_mock)
     end
   end
+
+  def authenticate
+    return true
+  end
 end
