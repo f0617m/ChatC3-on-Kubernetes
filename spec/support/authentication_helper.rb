@@ -3,7 +3,10 @@ module AuthenticationHelper
   
   self.included do
     before do
-      allow(self).to receive(:authenticate)
+      controller_mock = double('Controller mock')
+      allow(controller_mock).to receive(:authenticate)
+
+      allow(self).to receive(controller_mock)
     end
   end
 
