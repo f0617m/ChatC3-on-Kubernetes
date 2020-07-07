@@ -1,8 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe 'RoomsController' do
+describe '#find' do
     it 'res code 200' do
-        get '/api/v1/getRoom'
+        get :find
         expect(response.status).to eq 200
         json = JSON.parse(response.body)
     end
