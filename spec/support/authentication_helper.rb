@@ -1,4 +1,4 @@
-module AuthenticationHelper()
+module AuthenticationHelper
   extend ActiveSupport::Concern
   
   self.included do
