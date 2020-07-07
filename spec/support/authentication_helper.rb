@@ -3,7 +3,7 @@ module AuthenticationHelper
   
   self.included do
     before do
-      allow_any_instance_of(self).to receive(:authenticate)
+      allow(self).to receive(:authenticate).and_return(true)
     end
   end
 end
