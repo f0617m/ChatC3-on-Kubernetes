@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Get /getRoom' do
+describe RoomsController do
     it 'res code 200' do
         get "/getRoom"
         expect(response.status).to eq 200
