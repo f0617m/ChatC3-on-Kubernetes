@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 describe Api::V1::RoomsController, type: :controller, authentication: :skip do
-  before do
-    allow(controller).to receive(:authentication).and_return(true)
-  end
+  before { authenticateMock(controller) }
 
   it 'test' do
     expect(200).to eq 200
