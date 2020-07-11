@@ -43,4 +43,25 @@ describe Api::V1::UsersController, type: :controller, authentication: :skip do
     # res 200
     expect(response.status).to eq 200
   end
+
+  it 'POST /updateName' do
+    post 'updateName', params: { user_id: user.user_id, name: 'testuser456' }
+
+    # res 200
+    expect(response.status).to eq 200
+  end
+
+  it 'POST /updatePassword' do
+    post 'updatePassword', params: { user_id: user.user_id, password: 'testuser456' }
+
+    # res 200
+    expect(response.status).to eq 200
+  end
+
+  it 'POST /setRoomId' do
+    post 'setRoomId', params: { user_id: user.user_id, room_id: '1' }
+
+    # res 200
+    expect(response.status).to eq 200
+  end
 end
