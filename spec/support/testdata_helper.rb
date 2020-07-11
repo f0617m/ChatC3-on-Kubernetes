@@ -6,7 +6,7 @@ module TestDataHelper
   def createTestData
     # テストデータの登録
     # user
-    user = create(:user, :skip_validate)
+    user = create(:user)
     post "/api/v1/users/", :user_id => user.user_id, :name => user.name, :image_name => user.image_name, :password => user.password
 
     # room

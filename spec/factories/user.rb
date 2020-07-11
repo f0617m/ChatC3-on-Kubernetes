@@ -2,12 +2,7 @@ FactoryBot.define do
     factory :user do
       user_id { "testuser123" }
       name { "testuser123" }
-      image_name { "testuser123" }
+      image_name { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/image/default.png')) }
       password { 'testuser123' }
-
-      # validateチェックのスキップ
-      trait :skip_validate do
-        to_create {|instance| instance.save(validate: false)}
-      end
     end
 end
