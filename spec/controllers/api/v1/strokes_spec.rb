@@ -13,7 +13,7 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
                                         prevy: stroke.prevy,
                                         currx: stroke.currx,
                                         curry: stroke.curry,
-                                        witdh: stroke.width,
+                                        width: stroke.width,
                                         color: stroke.color
                                         } }
   end
@@ -26,7 +26,21 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
 
     json = JSON.parse(response.body)
 
-    #  messageArray確認
+    #  stroke確認
     expect(json['room_id']).to eq '1'
+  end
+
+  it 'POST /updateline' do
+    post 'draw', params: { stroke: { room_id: stroke.room_id,
+                                        prevx: '789',
+                                        prevy: '789',
+                                        currx: '987',
+                                        curry: '987',
+                                        width: '5',
+                                        color: '#000000'
+                                        } }
+
+    # res 200
+    expect(response.status).to eq 200
   end
 end

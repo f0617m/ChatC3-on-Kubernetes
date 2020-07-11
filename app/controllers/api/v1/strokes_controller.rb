@@ -19,7 +19,7 @@ module Api
       end
 
       # POST /getStrokes
-      def getStroke
+      def getStrokes
         @strokes = Stroke.where(room_id: params[:id]).order('created_at ASC')
 
         render json: @strokes
