@@ -3,9 +3,10 @@ require 'rails_helper'
 describe Api::V1::MessagesController, type: :controller, authentication: :skip do
   before do
     authenticateMock(controller)
-    message = create(:message) 
-    post 'create', params: { message: { message: message.message, user_id: message.user_id, room_id: message.room_id } }
   end
+
+  let!(:message) { create(:message) } 
+  post 'create', params: { message: { message: message.message, user_id: message.user_id, room_id: message.room_id } }
 
   it 'GET /getMessages/:id' do
     get 'getMessages', :id => message.room_id
