@@ -17,7 +17,7 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
     # res 200
     expect(response.status).to eq 200
 
-    json = JSON.parse(response.body)
+    json = JSON.parse(response.data)
     STDOUT.puts json
 
     #  messageArray確認
