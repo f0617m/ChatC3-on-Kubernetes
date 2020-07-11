@@ -1,5 +1,5 @@
 FactoryBot.define do
-    factory :rooms do
+    factory :room do
       status { "Waiting" }
     end
 end
