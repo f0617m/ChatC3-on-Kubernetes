@@ -4,5 +4,10 @@ FactoryBot.define do
       name { "testuser123" }
       image_name { "testuser123" }
       password { 'testuser123' }
+
+      # validateチェックのスキップ
+      trait :skip_validate do
+        to_create {|instance| instance.save(validate: false)}
+      end
     end
 end
