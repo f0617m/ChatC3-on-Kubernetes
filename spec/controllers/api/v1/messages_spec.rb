@@ -18,8 +18,8 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
     expect(response.status).to eq 200
 
     json = JSON.parse(response.body)
-
-    logger.debug json['data']
+    STDOUT.puts json['data']
+    
     #  messageArray確認
     expect(json['data'][0]).to eq 'test message'
   end
