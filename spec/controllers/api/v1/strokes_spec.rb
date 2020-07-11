@@ -26,19 +26,21 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
 
     json = JSON.parse(response.body)
 
+    STDOUT.puts json
+
     #  stroke確認
     expect(json['room_id']).to eq '1'
   end
 
   it 'POST /updateline' do
-    post 'draw', params: { stroke: { room_id: stroke.room_id,
-                                        fromx: '789',
-                                        fromy: '789',
-                                        tox: '987',
-                                        toy: '987',
-                                        width: '5',
-                                        color: '#000000'
-                                        } }
+    post 'draw', params: { stroke: { data: { room_id: stroke.room_id,
+                                            fromx: '789',
+                                            fromy: '789',
+                                            tox: '987',
+                                            toy: '987',
+                                            width: '5',
+                                            color: '#000000'
+                                        } } }
 
     # res 200
     expect(response.status).to eq 200
