@@ -5,7 +5,7 @@ describe Api::V1::RoomsController, type: :controller, authentication: :skip do
     authenticateMock(controller)
   end
 
-  let!(:room) { create(:room)) }
+  let!(:room) { create(:room) }
 
   it 'create test data' do
     post 'create', params: { room: {status: room.status } }
