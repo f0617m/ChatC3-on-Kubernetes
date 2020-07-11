@@ -18,9 +18,15 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
     expect(response.status).to eq 200
 
     json = JSON.parse(response.body)
-    STDOUT.puts json
 
     #  messageArray確認
     expect(json[0]['message']).to eq 'test message'
+  end
+
+  it 'POST /sendMessage' do
+    post 'talk', params: { message: { message: 'talk test', user_id: 'testuser123', room_id: '1' } }
+
+    # res 200
+    expect(response.status).to eq 200
   end
 end
