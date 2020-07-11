@@ -3,7 +3,11 @@ require 'rails_helper'
 describe Api::V1::RoomsController, type: :controller, authentication: :skip do
   before do
     authenticateMock(controller)
-    room = create(:room)
+  end
+
+  let!(:room) { create(:room)) }
+
+  it 'create test data' do
     post 'create', params: { room: {status: room.status } }
   end
 
