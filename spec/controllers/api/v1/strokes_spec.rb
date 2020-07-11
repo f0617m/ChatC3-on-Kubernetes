@@ -29,7 +29,7 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
     STDOUT.puts json
 
     #  stroke確認
-    expect(json['room_id']).to eq '1'
+    expect(json[0]['room_id']).to eq '1'
   end
 
   it 'POST /updateline' do
