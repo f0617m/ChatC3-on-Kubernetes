@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :messages, param: :user_id
       resources :users, param: :user_id
-      resources :rooms, param: :user_id
-      resources :strokes, param: :user_id
+      resources :rooms, param: :room_id
+      resources :strokes, param: :room_id
       post '/login' => 'users#login'
       post '/tokenLogin' => 'users#tokenLogin'
       post '/checkPassword' => 'users#checkPassword'
@@ -15,9 +15,9 @@ Rails.application.routes.draw do
       post '/updateName' => 'users#updateName'
       post '/updatePassword' => 'users#updatePassword'
       get '/getRoom' => 'rooms#find'
-      post '/updateline' => 'rooms#draw'
       post '/sendMessage' => 'messages#talk'
       get '/getMessages/:id' => 'messages#getMessages'
+      post '/updateline' => 'strokes#draw'
       get '/getStroke/:id' => 'strokes#getStroke'
     end
   end

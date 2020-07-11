@@ -18,7 +18,7 @@ module Api
         render json: @message
       end
 
-      # GET /getMessages
+      # GET /getMessages/:id
       def getMessages
         @messages = Message.where(room_id: params[:id]).order('created_at ASC')
 

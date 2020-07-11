@@ -49,24 +49,6 @@ module Api
         @room.destroy
       end
 
-      # POST /updateline
-      def draw
-        @stroke = Stroke.new(
-          room_id: params['room_id'],
-          prevx: params['data']['fromx'],
-          prevy: params['data']['fromy'],
-          currx: params['data']['tox'],
-          curry: params['data']['toy'],
-          width: params['data']['width'],
-          color: params['data']['color']
-        )
-
-        @stroke.save
-
-        ActionCable.server.broadcast "lines_#{params['room_id']}", params
-        head :ok
-      end
-
       def authenticate
         authenticate_or_request_with_http_token do |token, options|
           auth_user = User.find_by(token: token)
