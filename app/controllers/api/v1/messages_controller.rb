@@ -27,11 +27,19 @@ module Api
         @messages.each do |message|
           @user = User.find_by(user_id: message.user_id)
 
+          name = ''
+          image = ''
+
+          if @user
+            name = @user.name
+            image = @user.image_name.url
+          end
+
           messageArray.push(
             message: message.message,
             user_id: message.user_id,
-            user_name: @user.name,
-            image_name: @user.image_name.url,
+            user_name: name,
+            image_name: image,
             room_id: message.room_id
           )
         end
