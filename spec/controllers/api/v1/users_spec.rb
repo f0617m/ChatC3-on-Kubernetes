@@ -61,7 +61,7 @@ describe Api::V1::UsersController, type: :controller, authentication: :skip do
   it 'POST /setRoomId' do
     post 'setRoomId', params: { user_id: user.user_id, room_id: '1' }
 
-    # res 200
-    expect(response.status).to eq 200
+    # res 204
+    expect(response.status).to eq 204
   end
 end
