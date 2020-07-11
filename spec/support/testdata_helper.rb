@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'messages_controller'
+require 'messages_spec'
 
 module TestDataHelper
 
