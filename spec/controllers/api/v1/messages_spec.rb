@@ -8,7 +8,7 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
   end
 
   it 'GET /getMessages/:id' do
-    get 'getMessages', :id => messages.room_id
+    get 'getMessages', :id => message.room_id
 
     # res 200
     expect(response.status).to eq 200
