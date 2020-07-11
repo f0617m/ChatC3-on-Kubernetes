@@ -58,7 +58,7 @@ jobs:
       # Rspec
       - run:
           name: Rspec
-          command: bundle exec rspec -f documentation
+          command: bundle exec rspec -f documentation --backtrace
 
 workflows:
   version: 2
