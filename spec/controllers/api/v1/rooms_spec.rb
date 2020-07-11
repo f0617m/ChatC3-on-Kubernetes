@@ -3,13 +3,16 @@ require 'rails_helper'
 describe Api::V1::RoomsController, type: :controller, authentication: :skip do
   before { authenticateMock(controller) }
 
-  it 'test' do
-    expect(200).to eq 200
-  end
+  create(:room, room_id: '12345', status: 'Waiting')
 
-  it 'res code 200' do
+  it 'Get /getroom' do
     get 'find'
+
+    # res 200
     expect(response.status).to eq 200
     json = JSON.parse(response.body)
+
+    # roomデータの返却確認
+    expect(json['data']['title']).to eq 'room'
   end
 end
