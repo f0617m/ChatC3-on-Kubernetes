@@ -18,7 +18,7 @@ module Api
         render json: @message
       end
 
-      # GET /getMessages
+      # GET /getMessages/:id
       def getMessages
         @messages = Message.where(room_id: params[:id]).order('created_at ASC')
 
@@ -27,11 +27,19 @@ module Api
         @messages.each do |message|
           @user = User.find_by(user_id: message.user_id)
 
+          name = ''
+          image = ''
+
+          if @user
+            name = @user.name
+            image = @user.image_name.url
+          end
+
           messageArray.push(
             message: message.message,
             user_id: message.user_id,
-            user_name: @user.name,
-            image_name: @user.image_name.url,
+            user_name: name,
+            image_name: image,
             room_id: message.room_id
           )
         end
@@ -45,7 +53,7 @@ module Api
         @message = Message.new(message_params)
 
         if @message.save
-          render json: @message, status: :created, location: @message
+          render json: @message, status: :created
         else
           render json: @message.errors, status: :unprocessable_entity
         end
@@ -97,7 +105,7 @@ module Api
       end
 
       def message_params
-        params.require(:message).permit(:message)
+        params.require(:message).permit(:message, :user_id, :room_id)
       end
     end
   end

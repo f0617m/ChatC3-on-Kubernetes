@@ -45,7 +45,7 @@ module Api
         @user = User.find_by(token: params[:token])
 
         if @user
-          render json: @user, status: :created
+          render json: @user
         else
           render plain: 'tokenが不正です', status: :unprocessable_entity
         end
@@ -56,7 +56,7 @@ module Api
         @user = User.find_by(user_id: params[:user_id])
 
         if @user && @user.authenticate(params[:password])
-          render json: @user, status: :created
+          render json: @user
         else
           render json: @user.errors, status: :unprocessable_entity
         end
@@ -89,6 +89,7 @@ module Api
         render json: @user.image_name
       end
 
+      # POST /uploadImage
       def uploadImage
         @user = User.find_by(user_id: params[:user_id])
 
@@ -103,6 +104,7 @@ module Api
         }
       end
 
+      # POST /updateName
       def updateName
         @user = User.find_by(user_id: params[:user_id])
 
@@ -117,6 +119,7 @@ module Api
         }
       end
 
+      # POST /updatePassword
       def updatePassword
         @user = User.find_by(user_id: params[:user_id])
 

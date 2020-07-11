@@ -22,6 +22,8 @@ require 'rspec/rails'
 #
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
+Rails.logger = Logger.new(STDOUT)
+
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -64,4 +66,7 @@ RSpec.configure do |config|
 
   # token認証Skipのinclude
   config.include AuthenticationHelper, type: :controller, authentication: :skip
+
+  # FactoryBotのinclude
+  config.include FactoryBot::Syntax::Methods
 end

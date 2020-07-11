@@ -1,14 +1,20 @@
 require 'rails_helper'
 
 describe Api::V1::RoomsController, type: :controller, authentication: :skip do
-
-  it 'test' do
-    expect(200).to eq 200
+  before do
+    authenticateMock(controller)
   end
 
-  it 'res code 200' do
+  let!(:room) { create(:room) }
+
+  it 'create test data' do
+    post 'create', params: { room: {status: room.status } }
+  end
+
+  it 'Get /getroom' do
     get 'find'
+
+    # res 200
     expect(response.status).to eq 200
-    json = JSON.parse(response.body)
   end
 end
