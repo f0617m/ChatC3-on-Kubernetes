@@ -15,7 +15,7 @@ describe Api::V1::UsersController, type: :controller, authentication: :skip do
     post 'login', params: { user_id: user.user_id, password: user.password }
 
     # res 200
-    expect(response.status).to eq 200
+    expect(response.status).to eq 201
 
     json = JSON.parse(response.body)
 
