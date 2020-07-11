@@ -3,8 +3,6 @@ require 'rails_helper'
 describe Api::V1::RoomsController, type: :controller, authentication: :skip do
   before { authenticateMock(controller) }
 
-  create(:room, room_id: '12345', status: 'Waiting')
-
   it 'Get /getroom' do
     get 'find'
 

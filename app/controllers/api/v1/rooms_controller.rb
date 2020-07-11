@@ -49,6 +49,7 @@ module Api
         @room.destroy
       end
 
+      # POST /updateline
       def draw
         @stroke = Stroke.new(
           room_id: params['room_id'],
