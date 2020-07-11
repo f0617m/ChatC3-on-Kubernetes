@@ -14,12 +14,33 @@ describe Api::V1::UsersController, type: :controller, authentication: :skip do
   it 'POST /login' do
     post 'login', params: { user_id: user.user_id, password: user.password }
 
-    # res 200
+    # res 201
     expect(response.status).to eq 201
 
     json = JSON.parse(response.body)
 
     #  login(ユーザID)確認
     expect(json['user_id']).to eq 'testuser123'
+  end
+
+  it 'POST /checkPassword' do
+    post 'checkPassword', params: { user_id: user.user_id, password: user.password }
+
+    # res 200
+    expect(response.status).to eq 200
+  end
+
+  it 'GET /getRoomId' do
+    get 'getRoomId', params: { user_id: user.user_id }
+
+    # res 200
+    expect(response.status).to eq 200
+  end
+
+  it 'POST /uploadImage' do
+    post 'uploadImage', params: { user_id: user.user_id, image_name: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/image/default2.png')) }
+
+    # res 200
+    expect(response.status).to eq 200
   end
 end
