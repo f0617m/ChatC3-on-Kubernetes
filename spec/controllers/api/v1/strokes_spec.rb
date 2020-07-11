@@ -18,8 +18,8 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
                                         } }
   end
 
-  it 'POST /getStrokes' do
-    get 'getStrokes', params: { id: stroke.room_id }
+  it 'GET /getStroke/:id' do
+    get 'getStroke', params: { id: stroke.room_id }
 
     # res 200
     expect(response.status).to eq 200
@@ -32,10 +32,10 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
 
   it 'POST /updateline' do
     post 'draw', params: { stroke: { room_id: stroke.room_id,
-                                        prevx: '789',
-                                        prevy: '789',
-                                        currx: '987',
-                                        curry: '987',
+                                        fromx: '789',
+                                        fromy: '789',
+                                        tox: '987',
+                                        toy: '987',
                                         width: '5',
                                         color: '#000000'
                                         } }

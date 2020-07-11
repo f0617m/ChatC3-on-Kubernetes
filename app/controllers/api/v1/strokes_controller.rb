@@ -18,8 +18,8 @@ module Api
         render json: @stroke
       end
 
-      # POST /getStrokes
-      def getStrokes
+      # GET /getStroke/:id
+      def getStroke
         @strokes = Stroke.where(room_id: params[:id]).order('created_at ASC')
 
         render json: @strokes
@@ -30,7 +30,7 @@ module Api
         @stroke = Stroke.new(stroke_params)
 
         if @stroke.save
-          render json: @stroke, status: :created, location: @stroke
+          render json: @stroke, status: :created
         else
           render json: @stroke.errors, status: :unprocessable_entity
         end
