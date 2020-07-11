@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 module TestDataHelper
-    
+
   # テストデータの作成
   def createTestData
     # テストデータの登録
     # users
-    let(:users) { create(:users, user_id: 'testuser123', name: 'testuser123', image_name: 'Default.png'), password: 'testuser123' }
+    let(:users) { create(:users, user_id: 'testuser123', name: 'testuser123', image_name: 'Default.png', password: 'testuser123') }
     post "/api/v1/users/", :user_id => users.user_id, :name => users.name, :image_name => users.image_name, :password => users.password
 
     # rooms
-    let(:rooms) { create(:rooms, status: 'Waiting' }
+    let(:rooms) { create(:rooms, status: 'Waiting') }
     post "/api/v1/rooms/", :status => rooms.status
 
     # messages
