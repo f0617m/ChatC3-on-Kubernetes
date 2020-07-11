@@ -64,4 +64,7 @@ RSpec.configure do |config|
 
   # token認証Skipのinclude
   config.include AuthenticationHelper, type: :controller, authentication: :skip
+
+  # FactoryBotのinclude
+  config.include FactoryBot::Syntax::Methods
 end
