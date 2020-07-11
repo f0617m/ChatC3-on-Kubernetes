@@ -33,7 +33,7 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
   end
 
   it 'POST /updateline' do
-    post 'draw', params: { stroke: { room_id: stroke.room_id,
+    post 'draw', params: { room_id: stroke.room_id,
                                     data: { 
                                             fromx: '789',
                                             fromy: '789',
@@ -42,7 +42,7 @@ describe Api::V1::StrokesController, type: :controller, authentication: :skip do
                                             width: '5',
                                             color: '#000000'
                                             }
-                                    } }
+                                    } 
 
     # res 200
     expect(response.status).to eq 200
