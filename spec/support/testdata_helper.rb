@@ -6,15 +6,15 @@ module TestDataHelper
   def createTestData
     # テストデータの登録
     # users
-    users = create(:users, user_id: 'testuser123', name: 'testuser123', image_name: 'Default.png', password: 'testuser123')
+    users = create(:users)
     post "/api/v1/users/", :user_id => users.user_id, :name => users.name, :image_name => users.image_name, :password => users.password
 
     # rooms
-    rooms = create(:rooms, status: 'Waiting')
+    rooms = create(:rooms)
     post "/api/v1/rooms/", :status => rooms.status
 
     # messages
-    messages = create(:messages, message: 'test message', user_id: 'testuser123', room_id: '1')
+    messages = create(:messages)
     post "/api/v1/messages/", :messages => messages.message, :user_id => messages.user_id, :room_id => messages.room_id
   end
 end
