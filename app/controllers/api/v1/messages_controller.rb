@@ -97,7 +97,7 @@ module Api
       end
 
       def message_params
-        params.require(:message).permit(:message)
+        params.require(:message).permit(:message, :user_id, :room_id)
       end
     end
   end
