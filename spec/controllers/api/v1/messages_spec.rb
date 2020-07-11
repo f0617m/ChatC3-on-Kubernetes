@@ -21,6 +21,6 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
     STDOUT.puts json
 
     #  messageArray確認
-    expect(json.message).to eq 'test message'
+    expect(json[0]['message']]).to eq 'test message'
   end
 end
