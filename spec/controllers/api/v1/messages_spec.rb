@@ -12,7 +12,7 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
   end
 
   it 'GET /getMessages/:id' do
-    get 'getMessages', :id => message.room_id
+    get 'getMessages', params: { id: message.room_id }
 
     # res 200
     expect(response.status).to eq 200
