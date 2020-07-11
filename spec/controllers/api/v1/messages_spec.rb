@@ -17,10 +17,10 @@ describe Api::V1::MessagesController, type: :controller, authentication: :skip d
     # res 200
     expect(response.status).to eq 200
 
-    json = JSON.parse(response.data)
+    json = JSON.parse(response.body)
     STDOUT.puts json
 
     #  messageArray確認
-    expect(json['data'][0]).to eq 'test message'
+    expect(json['message']).to eq 'test message'
   end
 end
