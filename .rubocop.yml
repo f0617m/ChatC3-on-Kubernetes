@@ -53,3 +53,6 @@ Style/NonNilCheck:
 
 Style/SafeNavigation:
   Enabled: false
+
+Style/MutableConstant:
+  Enabled: false

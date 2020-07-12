@@ -1,7 +1,7 @@
 class RoomChannel < ApplicationCable::Channel
-STATUS_TALKING = 'Talking'
-STATUS_WAITING = 'Waiting'
-STATUS_FINISHED = 'Finished'
+  STATUS_TALKING = 'Talking'
+  STATUS_WAITING = 'Waiting'
+  STATUS_FINISHED = 'Finished'
 
   def subscribed
     stream_from "start_#{params['room_id']}"
