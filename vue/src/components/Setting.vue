@@ -166,8 +166,6 @@ export default {
     }
   },
   mounted(){
-    this.getImage()
-    console.log(this.$store.getters['auth/getImageName'])
   },
   created(){
     this.$axios.defaults.headers.common['Authorization'] = "Token " + this.token;
@@ -193,13 +191,10 @@ export default {
     },
     be_imagename(){
       let url = this.$store.getters['auth/getImageName']
-      console.log('be_imagename')
-      console.log(url)
       if(url){
         let index = url.indexOf('/public')
         url = url.substring(index)
         url = decodeURI(url)
-        console.log(url)
         return url
       }
     },
@@ -219,19 +214,7 @@ export default {
         return false
       }
     },
-    getImage(){
-      this.$axios.post(this.$api.getURL('getImageName'),{
-        token: this.token
-      })
-      .then(response => {
-        this.setImage(response.data.url)
-      })
-      .catch(error => {
-        console.log(error)
-      });
-    },
     onFileChange(e){
-      console.log(e)
       let files = e.target.files || e.dataTransfer.files
 
       let reader = new FileReader()
@@ -290,7 +273,6 @@ export default {
         this.updateDialog.isShow = true
       })
       .catch(error => {
-        console.log(error)
       });
     },
     setImage(image_url){
@@ -301,7 +283,6 @@ export default {
       )
       .catch(
         error => {
-          console.log(error)
         }
       )
     },
@@ -313,7 +294,6 @@ export default {
       )
       .catch(
         error => {
-          console.log(error)
         }
       )
     },
@@ -338,7 +318,6 @@ export default {
           this.updateDialog.isShow = true
         })
         .catch(error => {
-          console.log(error)
         });
       }
     },
@@ -363,7 +342,6 @@ export default {
             this.updateDialog.isShow = true
           })
           .catch(error => {
-            console.log(error)
           });
         })
         .catch(error => {

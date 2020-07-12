@@ -19,6 +19,7 @@ module Api
       end
 
       # GET /getMessages/:id
+      # room_idに紐づくmessageを全取得
       def getMessages
         @messages = Message.where(room_id: params[:id]).order('created_at ASC')
 
@@ -74,6 +75,7 @@ module Api
       end
 
       # POST /sendMessage
+      # 新規messageの登録、ActionCableへの送信
       def talk
         @message = Message.new(message: params['message'], user_id: params['user_id'], room_id: params['room_id'])
 

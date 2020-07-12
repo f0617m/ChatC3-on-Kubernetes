@@ -113,7 +113,7 @@ export default {
 
         fetch(this.image_name)
         .then(response => response.blob())
-        .then(blob => new File([blob], "default.jpg"))
+        .then(blob => new File([blob], "default.png"))
         .then(file => {
           this.user_info.image_name = file
 
@@ -122,13 +122,6 @@ export default {
           formData.append("image_name", file)
           formData.append("password", this.user_info.password)
 
-          //formData.append("user", this.user_info)
-
-          //this.user_info.image_name = formData
-          console.log(file)
-          console.log(formData)
-
-          //this.$store.dispatch('auth/create', { user: this.user_info })
           this.$store.dispatch('auth/create', formData)
           .then(response => this.signupSuccessful(response))
           .catch(error => this.signupFailed(error))

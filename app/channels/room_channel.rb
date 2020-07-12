@@ -1,4 +1,8 @@
 class RoomChannel < ApplicationCable::Channel
+  STATUS_TALKING = 'Talking'
+  STATUS_WAITING = 'Waiting'
+  STATUS_FINISHED = 'Finished'
+
   def subscribed
     stream_from "start_#{params['room_id']}"
     stream_from "messages_#{params['room_id']}"
@@ -13,11 +17,12 @@ class RoomChannel < ApplicationCable::Channel
 
     @room = Room.find_by(id: params['room_id'])
 
+    # roomの人数によりstatus更新
     case count
-    when 0 then @room.status = 'Finished'
-    when 1 then @room.status = 'Waiting'
+    when 0 then @room.status = STATUS_FINISHED
+    when 1 then @room.status = STATUS_WAITING
     when 2 then
-      @room.status = 'Plaing'
+      @room.status = STATUS_TALKING
       startChat
     end
 
@@ -33,12 +38,13 @@ class RoomChannel < ApplicationCable::Channel
 
     @room = Room.find_by(id: params['room_id'])
 
+    # roomの人数によりstatus更新
     case count
-    when 0 then @room.status = 'Finished'
+    when 0 then @room.status = STATUS_FINISHED
     when 1 then
-      @room.status = 'Finished'
+      @room.status = STATUS_FINISHED
       removeRoom
-    when 2 then @room.status = 'Plaing'
+    when 2 then @room.status = STATUS_TALKING
     end
 
     @room.save

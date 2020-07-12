@@ -57,9 +57,6 @@ export default {
   created(){
     this.$axios.defaults.headers.common['Authorization'] = "Token " + this.token;
   },
-  mounted(){
-    this.getImage()
-  },
   computed: {
     username (){
       return this.$store.getters['auth/getName']
@@ -69,13 +66,10 @@ export default {
     },
     imagename(){
       let url = this.$store.getters['auth/getImageName']
-      console.log('Chat.vue imagename')
-      console.log(url)
       if(url){
         let index = url.indexOf('/public')
         url = url.substring(index)
         url = decodeURI(url)
-        console.log(url)
         return url
       }
     },
@@ -87,29 +81,6 @@ export default {
     },
   },
   methods: {
-    getImage(){
-      this.$axios.post(this.$api.getURL('getImageName'),{
-        token: this.token
-      })
-      .then(response => {
-        this.setImage(response.data.url)
-      })
-      .catch(error => {
-        console.log(error)
-      });
-    },
-    setImage(image_url){
-      this.$store.dispatch('auth/setImageName', image_url)
-      .then(
-        response => {
-        }
-      )
-      .catch(
-        error => {
-          console.log(error)
-        }
-      )
-    },
     sendMessage(content){
       if(this.content.length > 100){
         return
@@ -125,15 +96,11 @@ export default {
         user_name: '',
         image_name: '',
         room_id: this.$route.params['id']
-        //csrf_token: 'csrf_token here'
       })
       .then(response => {
-        //this.addMessage({message: this.content, user_id: this.userid, room_id: this.$route.params['id']})
         this.content = ''
-        //console.log(response)
       })
       .catch(error => {
-        //console.log(error)
       });
     },
     addMessage(message){
@@ -144,7 +111,6 @@ export default {
         url = decodeURI(url)
         message.image_name = url
       }
-
       this.chatMessages.push(message)
       this.scrollToEnd()
     },

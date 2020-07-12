@@ -49,8 +49,6 @@
 </template>
 
 <script>
-//import apiserver2 from '../apiserver.js'
-
 export default {
   name: 'startchat',
   data () {
@@ -80,7 +78,6 @@ export default {
         }
       })
       .catch(error => {
-        console.log(error)
       })
     },
     createRoom(){
@@ -95,7 +92,6 @@ export default {
         }
       })
       .catch(error => {
-        console.log(error)
       })
     },
     joinRoom(roomId){
@@ -112,12 +108,10 @@ export default {
           )
           .catch(
             error => {
-              console.log(error)
             }
           )
         })
         .catch(error => {
-          console.log(error)
         })
     },
   }
