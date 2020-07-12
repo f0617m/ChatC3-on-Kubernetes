@@ -66,11 +66,9 @@ export default{
   },
   actions: {
     create ({ commit }, data){
-      console.log(data)
       return new Promise((resolve, reject) => {
         axios.post(api.getURL('users'), data
         ).then(response => {
-          console.log(response)
           commit('create', response)
           resolve(response)
         }).catch(error => {
@@ -85,7 +83,6 @@ export default{
           commit('login', response)
           resolve(response)
         }).catch(error => {
-          console.log(error)
           reject(error)
         });
       })
@@ -97,7 +94,6 @@ export default{
           commit('login', response)
           resolve(response)
         }).catch(error => {
-          console.log(error)
           reject(error)
         });
       })

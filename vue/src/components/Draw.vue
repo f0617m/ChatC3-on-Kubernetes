@@ -171,13 +171,10 @@ export default {
           color: color,
           width: width
         }
-        //csrf_token: 'csrf_token here'
       })
       .then(response => {
-        //console.log(response)
       })
       .catch(error => {
-        //console.log(error)
       });
     },
     setLineWidth(){

@@ -63,8 +63,8 @@ export default {
   name: 'login',
   data () {
     return {
-      user_id: 'takana3333',
-      password: 'takana3333',
+      user_id: '',
+      password: '',
       showPassword: false,
       rules: {
         required: v => !!v || '必須入力です',
@@ -118,7 +118,7 @@ export default {
 
       fetch(this.guest_info.image_name)
       .then(response => response.blob())
-      .then(blob => new File([blob], "default.jpg"))
+      .then(blob => new File([blob], "default.png"))
       .then(file => {
         this.guest_info.user_id = date_str
         this.guest_info.password = date_str

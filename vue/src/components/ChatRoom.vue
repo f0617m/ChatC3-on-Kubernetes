@@ -143,11 +143,9 @@ export default {
   created(){
     this.$axios.defaults.headers.common['Authorization'] = "Token " + this.token;
     this.key1.updateContents(this.contents)
-    this.key1.updateViewNav(true)
+    this.key1.updateViewNav(false)
   },
   mounted() {
-    //this.getMessages()
-    //this.getStrokes()
     getMessages = this.getMessages
     invalidDialog = this.invalidDialog
     drawLine = this.drawLine
@@ -158,10 +156,6 @@ export default {
     this.createChannel()
   },
   beforeRouteLeave (to, from, next) {
-    console.log(to)
-    console.log(to.query['skip'])
-    console.log(from)
-
     var answer;
 
     if(to.query['skip']){
@@ -177,7 +171,6 @@ export default {
     }else{
       next(false)
     }
-
   },
   methods: {
     createChannel(){
@@ -191,9 +184,6 @@ export default {
             })
           },
           received: function(data) {
-
-            console.log('received')
-            console.log(data)
             if(data['action'] == "start"){
               invalidDialog()
             }
@@ -221,7 +211,6 @@ export default {
         this.loadMessages(response.data)
       })
       .catch(error => {
-        console.log(error)
       })
     },
     loadMessages(messages){
@@ -241,7 +230,6 @@ export default {
         this.loadStrokes(response.data)
       })
       .catch(error => {
-        console.log(error)
       })
     },
     loadStrokes(strokes){
