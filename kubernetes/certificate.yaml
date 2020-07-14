@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: chatc3-tls
+  namespace: default
+spec:
+  secretName: chatc3-tls
+  issuerRef:
+    # ClusterIssuerを指定する。
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: chatc3.com
+  dnsNames:
+  - chatc3.com

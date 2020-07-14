@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rails
-  namespace: chatc3
 spec:
   type: ClusterIP
   ports:
@@ -15,7 +14,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rails
-  namespace: chatc3
 spec:
   replicas: 1
   selector:
@@ -77,6 +75,5 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rails-env
-  namespace: chatc3
 data:
   RAILS_ROOT: /webapp

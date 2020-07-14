@@ -1,25 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: ingress
-    namespace: chatc3
-    labels:
-        app: ingress
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
-    tls:
-    - hosts:
-      - chatc3.net
-      secretName: ssl-certificate-secret
-    rules:
-    - host: chatc3.net
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: nginx
-            servicePort: 80
-    backend:
-      serviceName: nginx
-      servicePort: 80
-
-      
+  rules:
+  - host: chatc3.com
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 80
