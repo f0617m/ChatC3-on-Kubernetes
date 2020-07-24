@@ -14,32 +14,32 @@ URL:https://chatc3.com
 
 # 機能一覧：
 ## ユーザー
-・アカウント登録機能
-・ログイン/ログアウト機能
-・簡易ログイン(ゲストログイン)機能
-・プロフィール設定機能
+- アカウント登録機能
+- ログイン/ログアウト機能
+- 簡易ログイン(ゲストログイン)機能
+- プロフィール設定機能
 　－プロフィール画像/ユーザ名/パスワード変更
 
 ## チャット画面
-・チャット機能
-・お絵かき機能
+- チャット機能
+- お絵かき機能
 
 # 使用言語/フレームワーク一覧
-・フロントエンド
+- フロントエンド
 　－HTML/CSS/JavaScript
 　－Vue.js(+Vuetify)
-・バックエンド
+- バックエンド
 　－ruby 2.6.3
 　－Ruby on Rails 5.2.3
 
 # 使用技術一覧
-・Kubernetes
-・Docker
-・Nginx
-・MySQL
-・CircleCI
-・git/github
-・rubocop/Rspec
+- Kubernetes
+- Docker
+- Nginx
+- MySQL
+- CircleCI
+- git/github
+- rubocop/Rspec
 
 # 構築環境　アーキテクチャ
 
