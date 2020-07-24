@@ -45,9 +45,10 @@ ChatC3は、見知らぬ相手と1:1でチャットできるランダムチャ�
 - rubocop/Rspec
 
 # 構築環境　アーキテクチャ
-
-
-画像
 ![chatc3](https://user-images.githubusercontent.com/10390016/88372922-d2664c80-cdd1-11ea-87e9-872bb8a0039e.png)
 
 
+# アピールポイント
+- Kubernetesによるコンテナオーケストレーション環境の構築
+- CircleCI+rubocop+RspecによるCIの実装
+- ActionCableによるチャット＋お絵かき機能の実装
