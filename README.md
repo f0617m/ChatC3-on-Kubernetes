@@ -18,7 +18,7 @@ URL:https://chatc3.com
 - ログイン/ログアウト機能
 - 簡易ログイン(ゲストログイン)機能
 - プロフィール設定機能
-　－プロフィール画像/ユーザ名/パスワード変更
+　- プロフィール画像/ユーザ名/パスワード変更
 
 ## チャット画面
 - チャット機能
@@ -26,11 +26,11 @@ URL:https://chatc3.com
 
 # 使用言語/フレームワーク一覧
 - フロントエンド
-　－HTML/CSS/JavaScript
-　－Vue.js(+Vuetify)
+　- HTML/CSS/JavaScript
+　- Vue.js(+Vuetify)
 - バックエンド
-　－ruby 2.6.3
-　－Ruby on Rails 5.2.3
+　- ruby 2.6.3
+　- Ruby on Rails 5.2.3
 
 # 使用技術一覧
 - Kubernetes
