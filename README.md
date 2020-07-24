@@ -4,9 +4,9 @@ ChatC3は、見知らぬ相手と1:1でチャットできるランダムチャ�
 
 ※ゲストログイン機能有(画面右上の[ログイン]→[ゲストログイン])
 
-URL:https://chatc3.com
+【URL】https://chatc3.com
 
-画像
+![chatc3_sample](https://user-images.githubusercontent.com/10390016/88374055-017dbd80-cdd4-11ea-9d80-5ce135a8b659.png)
 
 # チャットの始め方
 ログインした状態でトップページの「チャット相手を探す」ボタンを押下すると、チャット相手とのマッチングが開始されます。
@@ -33,8 +33,8 @@ URL:https://chatc3.com
   - Ruby on Rails 5.2.3
 
 # 使用技術一覧
-- Kubernetes
-- Docker
+- Kubernetes 1.18.5
+- Docker 19.03
 - Nginx
 - MySQL
 - CircleCI
