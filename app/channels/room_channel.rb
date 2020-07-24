@@ -45,7 +45,7 @@ class RoomChannel < ApplicationCable::Channel
       @room.status = STATUS_FINISHED
       removeRoom
     when 2 then @room.status = STATUS_TALKING
-    else 
+    else
       @room.status = STATUS_FINISHED
     end
 
