@@ -60,6 +60,8 @@ spec:
         volumeMounts:
         - name: rails-persistent-storage
           mountPath: /webapp/public/uploads/user
+        - name: rails-persistent-storage
+          mountPath: /webapp/log
         command:
         - sh
         - -c

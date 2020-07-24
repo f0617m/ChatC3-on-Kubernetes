@@ -19,11 +19,12 @@ class RoomChannel < ApplicationCable::Channel
 
     # roomの人数によりstatus更新
     case count
-    when 0 then @room.status = STATUS_FINISHED
     when 1 then @room.status = STATUS_WAITING
     when 2 then
       @room.status = STATUS_TALKING
       startChat
+    else
+      @room.status = STATUS_FINISHED
     end
 
     @room.save
@@ -40,11 +41,12 @@ class RoomChannel < ApplicationCable::Channel
 
     # roomの人数によりstatus更新
     case count
-    when 0 then @room.status = STATUS_FINISHED
     when 1 then
       @room.status = STATUS_FINISHED
       removeRoom
     when 2 then @room.status = STATUS_TALKING
+    else 
+      @room.status = STATUS_FINISHED
     end
 
     @room.save
