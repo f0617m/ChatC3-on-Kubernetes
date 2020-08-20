@@ -55,5 +55,10 @@ ChatC3は、見知らぬ相手と1:1でチャットできるランダムチャ�
 
 # アピールポイント
 - Kubernetesによるコンテナオーケストレーション環境の構築
+  - Nginx-Ingress-Controllerを配置して、サービスへの振り分けを実装しています
+  - KUbernetes上にcert-managerを配置して、Lets Encryptと連携して証明書自動発行を実装しています
 - CircleCI+rubocop+RspecによるCIの実装
+  - Gitでのpush時に、CircleCIでrubocop+Rspecの処理が実行されるようにしています
 - ActionCableによるチャット＋お絵かき機能の実装
+  - ActionCable(WebSocket)により、チャット相手とリアルタイムでお絵かきを共有できる機能を実装しています。
+- RailsのAPIモードにより実装しています
